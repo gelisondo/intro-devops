@@ -66,25 +66,32 @@ resource "aws_codepipeline" "frontend1_pipeline" {
   #Definición del Rol - con su ARN
   role_arn = var.codepipeline_role
 
+  #Indicaos a que vamos usar el bucket ya creado "platzi-mis-despliegues-automaticos-con-terraform"
   artifact_store {
     type     = "S3"
     location = var.s3_terraform_pipeline
   }
 
+#Configuramos el origen del Código de nuestro proeyecto Angular
+#Como esta almacenado en BitBucket, se define la conexión al servicio 
+#Se configura el repositorio y su rama para extraer el código
   stage {
     name = "Source"
     action {
       name     = "Source"
       category = "Source"
       owner    = "AWS"
+      #Definición del proveedor, apunta a su coneccón 
       provider = "CodeStarSourceConnection"
       version  = "1"
       output_artifacts = [
         "SourceArtifact",
       ]
+      #Repositorio del equipo de desarrollo
       configuration = {
         FullRepositoryId     = "culturadevops/angular2.git"
         BranchName           = "master"
+        #Arn de la conexión
         ConnectionArn        = var.codestar_connector_credentials
         OutputArtifactFormat = "CODE_ZIP"
       }
