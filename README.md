@@ -82,6 +82,7 @@ Si vamos a la sección en AWS de CodeBuild, en **setting - connections** veremos
 El proceso sera:
 
 **BitBucket**       ==>  **Code Build Plan** ==> **Code Build apply**
+
 Descarga de códiog  ==>  Npm run build       ==> upload file ==>  S3
 
 
