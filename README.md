@@ -14,14 +14,14 @@ Puedes tomar cada uno de esas carpetas y crear un repo en alguna plataforma de g
 
 Vamos a configurar un PipLine con terraform para crear varios servicios en AWS, estos daran soporte a los seuigentes piplene CI/CD.
 
--Creamos previamente un bucket S3 en AWS
+- Creamos previamente un bucket S3 en AWS
 
 Servicios:
 
--PipeLine de AWS
--CodeBuil - plan
--CodeBuil - apply
--Code Commit
+- PipeLine de AWS
+- CodeBuil - plan
+- CodeBuil - apply
+- Code Commit
 
 Esto lo aplicaremos desde terraform, los mismos archivos están comentados para aclarar cada paso a aplicar:
 - 0states.tf
@@ -93,10 +93,12 @@ sus nombres para ingresarlos en el archivo de variables bajo:
 
 Vamos a los archiovos donde los creamos y copiamos sus nombres, para obtener en la consola de amason su ARN:
 
+CodePipeline:
 - 2iamcodepipeline.tf --> copiamos (name = "codepipeline_role")
 - AWS -> Roles -> Buscamos por el nombre - Entramos a el objeto y copiamos su ARN
 - variables.tfvars -> Agregamos este dato en la variables codepipeline_role="arn"
 
+Codebuild:
 - 2iamcodebuild.tf --> copiamos (name = "codebuild_role")
 - AWS -> Roles -> Buscamos por el nombre - Entramos a el objeto y copiamos su ARN
 - variables.tfvars -> Agregamos este dato en la variables codebuild_role="arn"
@@ -114,9 +116,9 @@ Con estos arn, terraform los podra identificar y agregarlos a nuestro **pipeline
 
 Los archivos de terraform que necesitaremos crear se alojaran debvajo de **repositorio-de-cicd** en una carpeta llamada **2-frontend**:
 
--2frontedn-pipeline.tf
--buildspec.yml
--varr2frontend.tf
+- 2frontedn-pipeline.tf
+- buildspec.yml
+- varr2frontend.tf
 
 Comentamos los archivos anteriores, para indicar como despliega nuestro pipeline para este proyecto **FrontEnd**
 
