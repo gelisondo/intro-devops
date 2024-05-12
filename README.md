@@ -12,7 +12,7 @@ Puedes tomar cada uno de esas carpetas y crear un repo en alguna plataforma de g
 
 # Configuramos una Iaac con Terraform
 
-Vamos a configurar un PipLine con terraform para crear varios servicios en AWS, estos daran soporte a los seuigentes piplene CI/CD.
+Vamos a configurar un PipeLine con terraform para crear varios servicios en AWS, estos daran soporte a los seuigentes pipelene CI/CD para desplegar nuestros softwares.
 
 - Creamos previamente un bucket S3 en AWS
 
@@ -31,7 +31,7 @@ Esto lo aplicaremos desde terraform, los mismos archivos están comentados para 
 - 3secret.tf
 
 
-Despues que tengamos nuestro entorno configurado lansaremos los suigentes comandos para desplegar la infra.
+Despues que tengamos nuestro entorno configurado, lansaremos los suigentes comandos para desplegar la infra.
 
 Inicializamos el directorio local, creando un entorno para terraform
 ```
