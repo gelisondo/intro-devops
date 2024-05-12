@@ -1,12 +1,17 @@
+
+#crea un bucket S3, para desplegar los artefactos FrontEnd
 resource "aws_s3_bucket" "frontend_artifacts" {
   bucket = var.S3FrontEnd
   acl    = "public-read"
   policy = data.aws_iam_policy_document.website_policy.json
+  #Aqui donde se cargaran los archivos de Agular y se serviran al publico(iternet)
   website {
     index_document = "index.html"
     error_document = "index.html"
   }
 }
+
+#Agregamos permisos y el recurso S3 para que culquiera los pueda ver.
 data "aws_iam_policy_document" "website_policy" {
   statement {
     actions = [
@@ -21,6 +26,8 @@ data "aws_iam_policy_document" "website_policy" {
     ]
   }
 }
+
+#crea un doebuild
 resource "aws_codebuild_project" "tf-frontend1" {
   name         = "cicd-build-${var.name_frontend}"
   description  = "pipeline for aplicacion frontend"
@@ -30,6 +37,7 @@ resource "aws_codebuild_project" "tf-frontend1" {
     type = "CODEPIPELINE"
   }
 
+  #En este caso utilizamos una imagen(linux) propia de AWS para hacer compilaciones
   environment {
     compute_type                = "BUILD_GENERAL1_SMALL"
     image                       = "aws/codebuild/standard:4.0"
@@ -43,14 +51,19 @@ resource "aws_codebuild_project" "tf-frontend1" {
       value = aws_s3_bucket.frontend_artifacts.id
     }
   }
+
+  #Agregamos un buildspec.
+  #Este integra otro archiov que indica que pasos realizar pora compilar el proyecto
+  #En nuestros caso llama al archivo buildspect.yml que contiene los pasos para preparar el entorno para angular
   source {
-    type      = "CODEPIPELINE" #BITBUCKET
+    type      = "CODEPIPELINE" #BITBUCKETaws
     buildspec = file("2-frontend/buildspec.yml")
   }
 }
 resource "aws_codepipeline" "frontend1_pipeline" {
-
+  #Definición del nombre
   name     = "cicd-${var.name_frontend}"
+  #Definición del Rol - con su ARN
   role_arn = var.codepipeline_role
 
   artifact_store {

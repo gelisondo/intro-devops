@@ -1,4 +1,7 @@
+#Rol que indica quien va usar nuestro codebuild
 
+##Indicamos quie uzara el servicio codebuild
+#Indicamos que este rol lo utilizara codebuild
 resource "aws_iam_role" "assume_codebuild_role" {
   name = "codebuild_role"
 
@@ -19,9 +22,11 @@ resource "aws_iam_role" "assume_codebuild_role" {
   EOF
 
 }
+
 data "aws_iam_policy_document" "cicd_build_policies" {
     statement{
         sid = ""
+        #Indicamos las acciones y permisos que tendrá 
         actions = ["logs:*", "s3:*", "codebuild:*", "secretsmanager:*","iam:*"]
         resources = ["*"]
         effect = "Allow"

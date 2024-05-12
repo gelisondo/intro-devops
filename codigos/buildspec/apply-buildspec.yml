@@ -2,9 +2,13 @@ version: 0.2
 phases:
   pre_build:
     commands:
+      #Configura el ambiente para poder lanzar comandos de terraform
       - terraform init
+      #Realiza una comprobación
       - terraform validate
   
   build:
     commands:
+      #aplica los cambios y le agrega un --auto-approve para que ningun humano tenga que intervenir.
+      #Crea la infraestructura.
       - terraform apply -var-file="variables.tfvars" --auto-approve

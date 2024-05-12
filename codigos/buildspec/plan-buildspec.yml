@@ -2,9 +2,12 @@ version: 0.2
 phases:
   pre_build:
     commands:
+      #Configura el ambiente para poder lanzar comandos de terraform
       - terraform init
+      #Realiza una comprobación
       - terraform validate
   
   build:
+    #correra terraform plan levantando un archivo de variables
     commands:
       - terraform plan -var-file="variables.tfvars" 

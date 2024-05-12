@@ -12,6 +12,8 @@ phases:
     commands:
         - echo Installing source NPM dependencies...
 
+#Con las suiguientes especificaciones instalaremos las dependencias del proyecto
+#Esto te los pueden pasar los Desarrolladores
   pre_build:
     commands:
       - echo installing dependencies...
@@ -19,6 +21,7 @@ phases:
       - npm install -g @angular-devkit/core
       - npm install
   build:
+#Los suiguientes comandos terminara de realizar el proceso de contrucción
     commands:
         - echo Build started 
         - ls

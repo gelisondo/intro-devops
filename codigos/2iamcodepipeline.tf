@@ -1,3 +1,8 @@
+#Rol que indica quien va usar nuestro codepipeline
+
+##Indicamos quie uzara el servicio codepipeline
+#Indicamos que este rol lo utilizara codepipeline
+
 
 resource "aws_iam_role" "assume_codepipeline_role" {
   name = "codepipeline_role"
@@ -47,3 +52,4 @@ resource "aws_iam_role_policy_attachment" "cicd_pipeline_attachment" {
     role = aws_iam_role.assume_codepipeline_role.id
 }
 
+#Nota: Rcuerden que el servicio **codepipeline** vo a tomar cosas del servicio **codebuild/codecommit** para hacer cosas y tambien datos de S3
